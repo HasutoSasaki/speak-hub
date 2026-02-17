@@ -12,7 +12,8 @@
     "export:dynamodb": "slidev export slides/dynamodb-scan-vs-query/slides.md",
     "dev:agent": "slidev slides/ai-agentの仕組みを調べてみた/slides.md --open",
     "build:agent": "slidev build slides/ai-agentの仕組みを調べてみた/slides.md",
-    "export:agent": "slidev export slides/ai-agentの仕組みを調べてみた/slides.md"
+    "export:agent": "slidev export slides/ai-agentの仕組みを調べてみた/slides.md",
+    "build:slides": "bash scripts/build-slides.sh"
   },
   "dependencies": {
     "@slidev/cli": "^52.11.5",
