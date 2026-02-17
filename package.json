@@ -3,14 +3,27 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "slidev build",
-    "dev": "slidev --open",
-    "export": "slidev export"
+    "dev:redis": "slidev slides/独自のRedis構築/slides.md --open",
+    "dev:starter": "slidev slides/starter-template/slides.md --open",
+    "build:redis": "slidev build slides/独自のRedis構築/slides.md",
+    "export:redis": "slidev export slides/独自のRedis構築/slides.md",
+    "dev:dynamodb": "slidev slides/dynamodb-scan-vs-query/slides.md --open",
+    "build:dynamodb": "slidev build slides/dynamodb-scan-vs-query/slides.md",
+    "export:dynamodb": "slidev export slides/dynamodb-scan-vs-query/slides.md",
+    "dev:agent": "slidev slides/ai-agentの仕組みを調べてみた/slides.md --open",
+    "build:agent": "slidev build slides/ai-agentの仕組みを調べてみた/slides.md",
+    "export:agent": "slidev export slides/ai-agentの仕組みを調べてみた/slides.md"
   },
   "dependencies": {
-    "@slidev/cli": "^51.8.2",
+    "@slidev/cli": "^52.11.5",
+    "@slidev/theme-apple-basic": "^0.25.1",
     "@slidev/theme-default": "latest",
     "@slidev/theme-seriph": "latest",
-    "vue": "^3.5.16"
+    "vue": "^3.5.27"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   }
 }
