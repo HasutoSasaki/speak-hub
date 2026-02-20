@@ -1,0 +1,84 @@
+name: Deploy Slides to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      slide:
+        description: 'デプロイするスライド名（slides/ 配下のディレクトリ名）'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Determine slides to build
+        id: targets
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "slides=${{ github.event.inputs.slide }}" >> "$GITHUB_OUTPUT"
+          else
+            changed=$(git diff --name-only HEAD~1 -- slides/ \
+              | grep -oP '^slides/\K[^/]+' \
+              | grep -v '^starter-template$' \
+              | sort -u \
+              | tr '\n' ' ' \
+              | xargs)
+            echo "slides=$changed" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check targets
+        if: steps.targets.outputs.slides == ''
+        run: |
+          echo "No slides to build. Skipping deployment."
+          exit 0
+
+      - name: Build target slides
+        if: steps.targets.outputs.slides != ''
+        run: bash scripts/build-slides.sh ${{ steps.targets.outputs.slides }}
+
+      - name: Merge with existing gh-pages content and regenerate index
+        if: steps.targets.outputs.slides != ''
+        run: |
+          if git fetch origin gh-pages 2>/dev/null; then
+            git worktree add gh-pages-tmp origin/gh-pages
+            for dir in gh-pages-tmp/*/; do
+              [ -d "$dir" ] || continue
+              name=$(basename "$dir")
+              if [[ ! -d "dist/$name" ]]; then
+                cp -r "$dir" "dist/$name"
+              fi
+            done
+            git worktree remove gh-pages-tmp
+          fi
+          # Regenerate index.html (no args = index only)
+          bash scripts/build-slides.sh
+
+      - name: Deploy to GitHub Pages
+        if: steps.targets.outputs.slides != ''
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist

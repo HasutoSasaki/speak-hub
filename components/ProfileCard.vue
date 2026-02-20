@@ -3,20 +3,21 @@ const name = "Hasuto（Sasaki Hasuto）";
 const role = "Server-side Engineer";
 const career = [
   {
-    period: "前職",
+    period: "2023.04 -",
     company: "SES企業",
     role: "Webサイト・Webアプリ開発",
     description: "Vue.js / Nuxt.js + Lambda / DynamoDB",
   },
   {
-    period: "現在",
-    company: "Classmethod",
-    role: "社内ツール開発",
+    period: "2026.01 -",
+    company: "classmethod",
+    role: "Webアプリ開発",
     description: "TypeScript / React + Lambda / DynamoDB",
   },
 ];
-const hobbies = ["筋トレ", "アニメ", "技術探求", "Golang", "Neovim"];
+const hobbies = ["筋トレ", "アニメ", "低レイヤー", "Golang", "Neovim"];
 const avatarSrc = new URL("../assets/images/avatar.jpeg", import.meta.url).href;
+const logoSrc = new URL("../assets/images/logo/job.jpg", import.meta.url).href;
 const socials = [
   {
     icon: "i-carbon-logo-github",
@@ -53,7 +54,14 @@ const socials = [
       <div class="flex flex-col gap-4 text-left">
         <div>
           <h2 class="!text-3xl font-bold !m-0 !p-0">{{ name }}</h2>
-          <p class="!text-base opacity-70 !mt-1 !mb-0">{{ role }}</p>
+          <div class="flex items-center gap-2.5 !mt-2">
+            <!-- <img
+              :src="logoSrc"
+              alt="classmethod"
+              class="h-5.5 object-contain"
+            /> -->
+            <p class="!text-base opacity-70 !m-0">{{ role }}</p>
+          </div>
         </div>
 
         <!-- Hobbies -->

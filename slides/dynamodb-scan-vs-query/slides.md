@@ -17,19 +17,169 @@ layout: intro
 </div>
 
 <!--
-DynamoDB の Scan と Query、どちらを使うべきか。
-検証データをもとに、その境界線を明らかにします。
+- DynamoDB Scan vs Query 〜検証で見えた境界線〜
+- AWS の DynamoDB において「Scan は避けるべき」→ よく聞くけど、何件からどれくらい差が出る？
+- 実際にベンチマークを取って検証した結果をお見せする
 -->
 
 ---
 
 <ProfileCard />
 
+<!--
+- Sasaki Hasuto と申します。
+- 現在は、classmethod でWebアプリ開発に携わっている
+- DynamoDB の設計に迷ったのが検証のきっかけ
+- 趣味は筋トレ、アニメ、低レイヤー技術、Golang、Neovimとかで、
+- 目標として今年はベンチプレス 100kg を目指している
+-->
+
+---
+layout: fact
 ---
 
-## layout: statement
+# 自分の手で検証する
+
+自分の手で得た経験は **自分だけの武器** になる
+
+<!--
+- 今日の裏メッセージ：「自分の手で検証する」
+- AI に聞けば答えは返ってくる時代
+- でも自分で動かして得た経験は、コピペでは手に入らない
+- この発表が検証してみるきっかけになれば嬉しい
+-->
+
+---
+
+## 今日持ち帰ってほしいこと
+
+<div class="mt-6 grid grid-cols-2 gap-8">
+<div class="bg-white/10 p-5 rounded-xl border border-gray-400/20">
+
+**技術的な知見**
+
+Scan と Query の性能差を数値で理解する
+
+</div>
+<div class="bg-white/10 p-5 rounded-xl border border-gray-400/20">
+
+**それ以上に大事なこと**
+
+<span v-mark.underline="{ color: '#F59E0B', at: 1 }">自分の手で検証する姿勢</span>
+
+</div>
+</div>
+
+<div v-click class="mt-4 opacity-90">
+
+この2つを軸に、DynamoDB の Scan と Query を検証した結果をお話しします
+
+</div>
+
+<!--
+- 持ち帰ってほしいことは2つ
+- ① 技術的な知見：Scan vs Query の性能差を数値で
+- ② 自分の手で検証する姿勢
+- この2軸でベンチマーク結果をお話しする
+-->
+
+---
+
+## DynamoDB とは
+
+<div class="grid grid-cols-2 gap-6 mt-4">
+<div class="bg-white/10 p-5 rounded-xl border border-gray-400/20">
+
+**AWS のフルマネージド NoSQL DB**
+
+- サーバーレスで運用負荷が少ない
+- Key-Value 型の NoSQL
+- PK 指定の取得は一桁ミリ秒のレスポンス
+
+</div>
+<div class="bg-white/10 p-5 rounded-xl border border-gray-400/20">
+
+**キー設計がすべて — 図書館で例えると**
+
+- <span class="text-amber-400 font-bold">Partition Key (PK)</span> — 本棚の「棚番号」
+- <span class="text-amber-400 font-bold">Sort Key (SK)</span> — 棚の中の「並び順」
+- PK が同じデータは同じ棚に格納される
+
+</div>
+</div>
+
+<div v-click class="mt-6 opacity-90">
+
+RDB のように自由な WHERE 句は使えない → <strong>どの棚に・どう並べるか</strong>を最初に設計する必要がある
+
+</div>
+
+<!--
+- AWS フルマネージド NoSQL、サーバーレス
+- PK 指定の取得なら一桁 ms
+- 図書館の例：PK = 棚番号、SK = 棚の中の並び順
+- 「どの棚に・どう並べるか」を最初に設計する必要がある
+- WHERE 句が自由に使えない → 設計ミスると Scan に頼ることに
+-->
+
+---
+
+## Scan と Query（GSI）の仕組み
+
+<div class="grid grid-cols-2 gap-6 mt-4">
+<div class="bg-white/10 p-5 rounded-xl border border-gray-400/20">
+
+<p class="text-m font-600 tracking-wide text-amber-400 !mb-2">Scan</p>
+
+テーブル **全体** を読み込み、FilterExpression で絞り込む
+
+- 全パーティションを順番に走査
+- フィルタは読み込み **後** に適用
+- 読み込んだデータ分だけ RCU を消費
+
+</div>
+<div class="bg-white/10 p-5 rounded-xl border border-gray-400/20">
+
+<p class="text-m font-600 tracking-wide text-amber-400 !mb-2">Query（GSI 利用）</p>
+
+**必要なパーティション** だけを読み込む
+
+- GSI = テーブルとは別のキーで検索できるインデックス
+- PK 指定で対象パーティションに直行
+- 読み込むデータ量が最小限で済む
+
+</div>
+</div>
+
+<div v-click class="mt-6 opacity-90">
+
+つまり Scan は「本棚を端から全部見る」、Query は「索引で目的のページを開く」
+
+</div>
+
+<!--
+- Scan：全体を読み込み → フィルタは読み込み後に適用 → 不要データ分も RCU 消費
+- Query：PK 指定で必要なパーティションだけ読む
+- GSI = 元のキーとは別のキーで Query できるインデックス
+- Scan = 本棚を端から全部見る、Query = 索引で目的のページを開く
+-->
+
+---
+layout: statement
+---
+
+## では本題に入ります。
+
+---
+layout: statement
+---
 
 # "Scan は避けるべき"
+
+<!--
+- 必ず最初に言われるフレーズ
+- 正しいけど、実際どれくらい差がある？ → 掘り下げた
+-->
 
 ---
 
@@ -46,9 +196,9 @@ DynamoDB の Scan と Query、どちらを使うべきか。
 </div>
 
 <!--
-DynamoDB を学ぶと必ず聞く「Scan は避けるべき」という話。
-でも、具体的に何件くらいから問題になるのか、コストはどれくらい違うのか、
-実は知らない人が多いのではないでしょうか。
+- ドキュメントや入門記事でよく見る話
+- 「数百件でも差は出る？」「何件から問題？」→ 答えに詰まる
+- 自分もまさにそうだった
 -->
 
 ---
@@ -83,8 +233,10 @@ DynamoDB を学ぶと必ず聞く「Scan は避けるべき」という話。
 </div>
 
 <!--
-知識としては知っているけど、具体的な数値感がわからないと設計時に自信を持てない。
-だから実際に検証してみました。
+- なぜ検証しようと思ったのか
+- 左：教科書的に知っていたこと
+- 右：実際にはわからなかったこと
+- 「聞いた話」ではなく「検証した事実」で判断したい → 検証を始めた
 -->
 
 ---
@@ -113,13 +265,22 @@ DynamoDB を学ぶと必ず聞く「Scan は避けるべき」という話。
 </div>
 
 <!--
-小規模から大規模まで、網羅的に検証するために30パターンを用意しました。
-対象データは全体の約30%という構成です。
+- 3サイズ × 5件数 × 2手法 = 計30パターン
+- Lambda Node.js 24.x、各5回の平均値
+- 注目：ヒット率は約30% → Scan は残り70%も読んでいる
+- この割合が後の結果に大きく影響
 -->
 
 ---
+layout: fact
+---
 
-## レスポンス時間: 0.5KB
+## 検証結果を見ていきましょう。
+
+
+---
+
+## レスポンス時間の比較 <span class="text-sm font-600 tracking-wide text-amber-400 ml-4">レコードサイズ: 0.5KB</span>
 
 <table>
   <thead>
@@ -140,9 +301,15 @@ DynamoDB を学ぶと必ず聞く「Scan は避けるべき」という話。
 
 </div>
 
+<!--
+- 0.5KB：100件〜1,000件は誤差レベル（数ms〜12ms）
+- 件数が増えるにつれ差が開く
+- 100万件：Scan 16s vs Query 10s → 小さなレコードでも6秒差
+-->
+
 ---
 
-## レスポンス時間: 1KB
+## レスポンス時間の比較 <span class="text-sm font-600 tracking-wide text-amber-400 ml-4">レコードサイズ: 1KB</span>
 
 <table>
   <thead>
@@ -163,11 +330,15 @@ DynamoDB を学ぶと必ず聞く「Scan は避けるべき」という話。
 
 </div>
 
+<!--
+- 1KB：1万件から差が出始める（61ms）
+- 100万件：26.3s vs 18.7s → 7.6秒差
+- 倍率は1.4倍だが、実時間7.6秒はユーザー体験に直結
+-->
+
 ---
 
-## レスポンス時間: 5KB
-
-### 大きなレコード
+## レスポンス時間の比較 <span class="text-sm font-600 tracking-wide text-amber-400 ml-4">レコードサイズ: 5KB</span>
 
 <table>
   <thead>
@@ -189,8 +360,9 @@ DynamoDB を学ぶと必ず聞く「Scan は避けるべき」という話。
 </div>
 
 <!--
-倍率だけ見ると大した差に見えませんが、実際の時間差が重要です。
-100件では数msの差ですが、100万件 x 5KBでは83秒もの差になります。
+- 5KB：差が爆発的に広がる
+- 1万件で Scan が1秒超え、10万件で5.3秒差
+- 100万件：137s vs 54s → 83秒差、システムとして成り立たない
 -->
 
 ---
@@ -218,8 +390,9 @@ DynamoDB を学ぶと必ず聞く「Scan は避けるべき」という話。
 </div>
 
 <!--
-RCUは一貫して約3.3倍の差。これは対象データが30%だったから。
-もし対象が全体の1%なら、Scan は100倍のコストがかかることになります。
+- サイズ・件数によらず Scan は Query の約3.3倍の RCU
+- 理由：ヒット率30% → 残り70%も読んでいるから
+- ヒット率1%なら100倍近くになる → ヒット率が下がるほど差は拡大
 -->
 
 ---
@@ -231,8 +404,9 @@ layout: fact
 5KB x 100万件での Scan と Query の差
 
 <!--
-最大パターンでは Scan に137秒、Query でも54秒。差は83秒。
-この規模ではどちらもAPIレスポンスとしては使えません。
+- 83秒。Scan 137s vs Query 54s
+- この規模ではどちらも同期レスポンスとしては厳しい
+- ただ、GSI の設計が不可欠なのは明らか
 -->
 
 ---
@@ -264,21 +438,23 @@ layout: fact
 </div>
 
 <!--
-検証結果から導き出した設計指針です。
-1,000件以下ならScanで問題ない。
-1万件を超えたらGSIを検討。10万件以上はGSI必須。
+- 〜1,000件：Scan で十分。GSI は書き込みコストも増えるのでシンプルに
+- 1万〜10万件：GSI 推奨。数百ms〜数秒の差、RCU 3倍以上
+- 10万件〜：GSI 必須。Scan では秒単位の遅延
+- 「Scan が絶対ダメ」ではなく、ユースケースに応じて選ぶ
 -->
 
 ---
 layout: statement
 ---
 
-# 検証した事実で設計判断する
+# 自分の手で検証する
 
 <!--
-「Scanは遅い」と聞いたから避ける、ではなく、
-自分のユースケースではどうなのかを検証して判断する。
-それが設計力であり、エンジニアとしての成長につながります。
+- 最初のメッセージに戻る
+- 「聞いたから避ける」ではなく、自分で動かして判断する
+- 検証したからこそ自信を持って言える
+- 気になったら手を動かしてみてほしい
 -->
 
 ---
@@ -287,7 +463,13 @@ layout: statement
 
 # ありがとうございました
 
-<div class="absolute bottom-10 left-10 text-sm opacity-70">
+<div class="absolute bottom-10 left-10 text-sm opacity-70 text-left">
   <p>詳細記事: <a href="https://dev.classmethod.jp/articles/dynamodb-scan-vs-query-benchmark/">DynamoDB Scan vs Query ベンチマーク検証</a></p>
   <p>検証コード: <a href="https://github.com/HasutoSasaki/dynamodb-scan-vs-query-benchmark">github.com/HasutoSasaki/dynamodb-scan-vs-query-benchmark</a></p>
 </div>
+
+<!--
+- 詳細は DevelopersIO の記事に
+- 検証コードも GitHub で公開中
+- 質問があればお気軽に
+-->
