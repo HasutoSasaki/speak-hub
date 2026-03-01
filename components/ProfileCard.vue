@@ -5,13 +5,13 @@ const career = [
   {
     period: "2023.04 -",
     company: "SES企業",
-    role: "Webサイト・Webアプリ開発",
+    role: "フロントエンドエンジニア",
     description: "Vue.js / Nuxt.js + Lambda / DynamoDB",
   },
   {
     period: "2026.01 -",
     company: "classmethod",
-    role: "Webアプリ開発",
+    role: "サーバーサイドエンジニア",
     description: "TypeScript / React + Lambda / DynamoDB",
   },
 ];
