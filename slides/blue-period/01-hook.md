@@ -44,6 +44,7 @@ layout: statement
 <!--
 - このセリフを見たとき、すごく楽になった
 - 天才じゃなくてもいい。見分けがつかなくなるまでやればいいだけなんだ、と
+- 参照先: https://meigengift.com/anime/blueperiod
 -->
 
 ---
