@@ -10,7 +10,7 @@ const career = [
   },
   {
     period: "2026.01 -",
-    company: "classmethod",
+    company: "クラスメソッド株式会社",
     role: "サーバーサイドエンジニア",
     description: "TypeScript / React + Lambda / DynamoDB",
   },
@@ -26,8 +26,8 @@ const socials = [
   },
   {
     icon: "i-carbon-logo-x",
-    url: "https://x.com/vt23358",
-    label: "@vt23358",
+    url: "https://x.com/hasuto00",
+    label: "@hasuto00",
   },
 ];
 </script>
