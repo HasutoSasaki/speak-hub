@@ -7,7 +7,7 @@
 
 ---
 
-## 最初にはっきり言います
+## はじめに
 
 <div class="mt-8 flex flex-col gap-5">
 <div class="bg-white/10 p-5 rounded-xl border border-gray-400/20 backdrop-blur-md shadow-sm">
@@ -55,32 +55,43 @@ layout: statement
 
 <h3 class="!text-lg font-bold text-blue-400 !mb-3 !opacity-100"><carbon:education class="inline mr-1" /> あらすじ</h3>
 
-美術未経験の高校生・**矢口八虎**が、絵の世界に魅せられ、**東京藝術大学**を目指す物語
+<div class="!text-sm !leading-relaxed">
+
+成績優秀で友人も多いが、どこか空虚な日々を送る高校生・**矢口八虎**。ある日、美術室で一枚の絵に心を奪われ、初めて「好きなこと」に出会う。**美術未経験**から日本最難関の**東京藝術大学**を目指す物語。
+
+</div>
 
 </div>
 <div class="bg-white/10 p-5 rounded-xl border border-gray-400/20 backdrop-blur-md shadow-sm">
 
 <h3 class="!text-lg font-bold text-blue-400 !mb-3 !opacity-100"><carbon:fire class="inline mr-1" /> 八虎の戦い方</h3>
 
-天才じゃない。でも、**圧倒的な量**と、**ひたむきな向き合い方**で戦った
+<div class="!text-sm !leading-relaxed">
+
+周囲には幼少期から絵を描き続けてきた**天才**たちがいる。圧倒的な才能差に打ちのめされながらも、八虎は**誰よりも量をこなし**、自分の絵を**言語化**し、泥臭く這い上がっていく。
+
+</div>
 
 </div>
 </div>
 
-<div v-click class="mt-6 opacity-80">
+<div v-click class="mt-5 bg-blue-400/10 p-4 rounded-xl border border-blue-400/20 backdrop-blur-md shadow-sm text-center">
 
-その中で出てくるセリフ
+この作品の中で出てくるセリフ —
 
 **「天才と見分けがつかなくなるまでやればいい。それだけだ。」**
 
-がすごく刺さった。
+がエンジニアとしての自分にすごく刺さった。
 
 </div>
 
 <!--
 - ブルーピリオドという作品を知っていますか？
-- 美術未経験の高校生・矢口八虎が東京藝大を目指す話
-- 彼は天才じゃない。でも圧倒的な量と、ひたむきな向き合い方で戦った
+- 成績優秀だけどどこか空虚な高校生・八虎が、美術室で一枚の絵に心を奪われる
+- 美術未経験から、日本最難関の東京藝大を目指す話
+- 周りには幼少期から描き続けてきた天才たちがいる
+- 才能差に打ちのめされながら、量と言語化で這い上がっていく
+- その中の「天才と見分けがつかなくなるまでやればいい」というセリフに救われた
 -->
 
 ---
