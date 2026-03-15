@@ -16,6 +16,9 @@
     "dev:blue-period": "slidev slides/blue-period/slides.md --open",
     "build:blue-period": "slidev build slides/blue-period/slides.md",
     "export:blue-period": "slidev export slides/blue-period/slides.md",
+    "dev:go-binary": "slidev slides/go-binary-deep-dive/slides.md --open",
+    "build:go-binary": "slidev build slides/go-binary-deep-dive/slides.md",
+    "export:go-binary": "slidev export slides/go-binary-deep-dive/slides.md",
     "build:slides": "bash scripts/build-slides.sh",
     "link:components": "bash scripts/link-components.sh"
   },
