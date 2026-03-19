@@ -8,7 +8,7 @@ layout: intro
 
 # Go のバイナリを覗いてみた
 
-速さの秘密はバイナリに隠れている？
+速さの手がかりを求めて、バイナリの中へ
 
 <div class="absolute bottom-10">
   <span class="font-700">
@@ -18,8 +18,8 @@ layout: intro
 
 <!--
 - Go のバイナリを覗いてみた、という話をする
-- Go は速いとよく言われるが、なぜ速いのか？
-- バイナリの中身を見ることで、その理由に迫った
+- Go は速いと言われるが、その理由が気になった
+- 手がかりを求めてバイナリの中を覗いてみた話
 -->
 
 ---
@@ -38,18 +38,17 @@ layout: statement
 
 # Go は速い
 
-# なぜ...？
+# その理由、気になりませんか？
 
 <!--
 - Go が速いのはみんな知っている
-- でも「なぜ速いのか」を説明できるか？
-- コンパイル言語だから？ goroutine があるから？
-- もう少し深く、バイナリレベルで見てみた
+- でも「なぜ速いのか」と聞かれると、意外と説明しづらい
+- 気になったので、バイナリの中から手がかりを探してみた
 -->
 
 ---
 
-## アプローチ: バイナリを直接見る
+## アプローチ: バイナリから攻めてみる
 
 <div class="mt-6 grid grid-cols-2 gap-6">
 <div class="bg-white/10 p-5 rounded-xl border border-gray-400/20 backdrop-blur-md shadow-sm">
@@ -81,9 +80,41 @@ go build -o ./bin/hello_go ./go/hello.go
 </div>
 
 <!--
+- 速さの理由を探るために、まずバイナリの中身を覗いてみることにした
 - 題材はシンプルな Hello World
-- コンパイルして生成されたバイナリを解析ツールで見ていく
 - シンプルなコードだからこそ、Go が裏で何をしているかが見えやすい
+-->
+
+---
+
+## 解析環境
+
+<div class="mt-6 grid grid-cols-2 gap-6">
+<div class="bg-white/10 p-5 rounded-xl border border-gray-400/20 backdrop-blur-md shadow-sm">
+
+<p class="!text-sm font-600 tracking-wide text-blue-400 !mb-2">Docker コンテナ</p>
+
+- **OS**: Ubuntu 24.04 (ARM aarch64)
+- **Go**: 1.26.0
+- **解析ツール**: file, size, binutils, strace
+
+</div>
+<div class="bg-white/10 p-5 rounded-xl border border-gray-400/20 backdrop-blur-md shadow-sm">
+
+<p class="!text-sm font-600 tracking-wide text-blue-400 !mb-2">なぜ Docker？</p>
+
+- Linux 環境で ELF バイナリを生成
+- 解析ツールが揃った環境を再現可能に
+- ホスト OS の差異を排除
+
+</div>
+</div>
+
+<!--
+- 解析は Docker コンテナ上で行った
+- Ubuntu 24.04、Go 1.26、ARM aarch64 環境
+- ELF バイナリを生成・解析するために Linux 環境を使っている
+- Docker なので誰でも同じ環境を再現できる
 -->
 
 ---
@@ -115,9 +146,10 @@ $ file ./bin/hello_go<br>
 
 <!--
 - file コマンドでバイナリの種類を確認
-- ELF = Linux/Unix の実行ファイル形式
-- 最も重要なのは statically linked — 依存をすべてバイナリに埋め込んでいる
-- not stripped = デバッグ情報が残っている → シンボルテーブルを解析できる
+- ELF = Linux/Unix の実行ファイル形式。macOS なら Mach-O、Windows なら PE になるが、今回は Docker (Ubuntu) 上なので ELF
+- ファイル形式は異なっても、Go が静的リンクで全部載せする設計は共通
+- 最も重要なのは statically linked スタティック・リンクト — 依存をすべてバイナリに埋め込んでいる
+- not stripped ノット・ストリップト = デバッグ情報が残っている → シンボルテーブルを解析できる
 -->
 
 ---
@@ -288,7 +320,7 @@ Go は依存もランタイムも **すべてバイナリに詰め込む** (Self
 <!--
 - Go のバイナリは「全部載せ」— Self-Contained な自己完結型
 - 依存ライブラリも、ランタイムも、すべて1つのバイナリに入っている
-- だから実行時に外部を探しに行く必要がない → 速い
+- これが速さの「全て」ではないが、重要な土台になっている
 -->
 
 ---
@@ -298,7 +330,7 @@ Go は依存もランタイムも **すべてバイナリに詰め込む** (Self
 <div class="mt-6 grid grid-cols-2 gap-6">
 <div class="bg-white/10 p-5 rounded-xl border border-gray-400/20 backdrop-blur-md shadow-sm">
 
-<p class="!text-sm font-600 tracking-wide text-blue-400 !mb-2"><carbon:flash class="inline mr-1" /> 速さの理由</p>
+<p class="!text-sm font-600 tracking-wide text-blue-400 !mb-2"><carbon:flash class="inline mr-1" /> 起動の速さ</p>
 
 - 実行時の依存解決が不要
 - 共有ライブラリのロードなし
@@ -323,7 +355,7 @@ Go は依存もランタイムも **すべてバイナリに詰め込む** (Self
 </div>
 
 <!--
-- 静的リンクの恩恵は速度だけではない
+- 静的リンクの恩恵は起動速度だけではない
 - バイナリ1つで完結するので、デプロイもシンプル
 - scratch ベースの Docker イメージで動かせる
 - トレードオフとしてバイナリサイズが大きくなるが、現代では許容範囲
@@ -333,11 +365,54 @@ Go は依存もランタイムも **すべてバイナリに詰め込む** (Self
 layout: statement
 ---
 
+## バイナリからわかったのは<br>速さの「土台」だった
+
+<!--
+- 静的リンクによる自己完結は、速さの全てではなく「土台」
+- 起動が速い、依存解決が不要 — これはバイナリから見えた部分
+- では実行時の速さ — GC やスケジューラの工夫は？
+-->
+
+---
+
+## この先にあるもの
+
+<div class="mt-6 grid grid-cols-3 gap-4">
+<div class="bg-white/10 p-5 rounded-xl border border-gray-400/20 backdrop-blur-md shadow-sm text-center">
+<p class="!text-lg font-bold text-blue-400 !mb-1">GC</p>
+<p class="!text-sm opacity-70 !m-0">低レイテンシな<br>Concurrent GC</p>
+</div>
+<div class="bg-white/10 p-5 rounded-xl border border-gray-400/20 backdrop-blur-md shadow-sm text-center">
+<p class="!text-lg font-bold text-blue-400 !mb-1">Scheduler</p>
+<p class="!text-sm opacity-70 !m-0">M:N スケジューリングと<br>goroutine の軽量さ</p>
+</div>
+<div class="bg-white/10 p-5 rounded-xl border border-gray-400/20 backdrop-blur-md shadow-sm text-center">
+<p class="!text-lg font-bold text-blue-400 !mb-1">Compiler</p>
+<p class="!text-sm opacity-70 !m-0">高速コンパイルと<br>最適化パス</p>
+</div>
+</div>
+
+<div v-click class="mt-6 opacity-90">
+
+今回見つけたのは入口 — **速さの本丸はランタイムの中にある**
+
+</div>
+
+<!--
+- バイナリ解析で見えたのは速さの一側面にすぎない
+- GC の低レイテンシ設計、goroutine の M:N スケジューリング、コンパイラ最適化
+- 今回は入口を覗いた — 次はランタイムの中に踏み込みたい
+-->
+
+---
+layout: statement
+---
+
 # バイナリを覗けば<br>言語の設計思想が見える
 
 <!--
-- 表面的な特徴だけでなく、バイナリレベルで見ることで設計思想が理解できる
-- Go は「全部入りのシンプルなバイナリ」という設計思想
+- バイナリレベルで見ることで「全部入りのシンプルなバイナリ」という設計思想が理解できた
+- 速さの全貌には届かなかったが、覗いてみる価値はあった
 - 気になったら file, size, go tool nm を試してみてほしい
 -->
 
