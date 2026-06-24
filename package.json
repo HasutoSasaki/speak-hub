@@ -19,19 +19,32 @@
     "dev:go-binary": "slidev slides/go-binary-deep-dive/slides.md --open",
     "build:go-binary": "slidev build slides/go-binary-deep-dive/slides.md",
     "export:go-binary": "slidev export slides/go-binary-deep-dive/slides.md",
+    "dev:pi4": "slidev slides/pi4-voice-ai-assistant/slides.md --open",
+    "build:pi4": "slidev build slides/pi4-voice-ai-assistant/slides.md",
+    "export:pi4": "slidev export slides/pi4-voice-ai-assistant/slides.md",
+    "dev:lora": "slidev slides/local-llm-lora-trainer/slides.md --open",
+    "build:lora": "slidev build slides/local-llm-lora-trainer/slides.md",
+    "export:lora": "slidev export slides/local-llm-lora-trainer/slides.md",
+    "dev:hobby-first": "slidev slides/hobby-first/slides.md --open",
+    "build:hobby-first": "slidev build slides/hobby-first/slides.md",
+    "export:hobby-first": "slidev export slides/hobby-first/slides.md",
     "build:slides": "bash scripts/build-slides.sh",
     "link:components": "bash scripts/link-components.sh"
   },
   "dependencies": {
-    "@slidev/cli": "^52.11.5",
-    "@slidev/theme-apple-basic": "^0.25.1",
-    "@slidev/theme-default": "latest",
     "@slidev/theme-seriph": "latest",
     "vue": "^3.5.27"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "esbuild"
+      "esbuild",
+      "playwright-chromium"
     ]
+  },
+  "devDependencies": {
+    "@slidev/cli": "^52.15.2",
+    "@slidev/theme-apple-basic": "^0.25.1",
+    "@slidev/theme-default": "latest",
+    "playwright-chromium": "^1.58.2"
   }
 }

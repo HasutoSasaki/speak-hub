@@ -1,0 +1,5 @@
+.slidev-layout h2 {
+  display: inline-block;
+  border-bottom: 3px solid #ea580c;
+  padding-bottom: 6px;
+}
