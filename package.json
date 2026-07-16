@@ -28,6 +28,12 @@
     "dev:hobby-first": "slidev slides/hobby-first/slides.md --open",
     "build:hobby-first": "slidev build slides/hobby-first/slides.md",
     "export:hobby-first": "slidev export slides/hobby-first/slides.md",
+    "dev:chicken": "slidev slides/why-chicken-breast/slides.md --open",
+    "build:chicken": "slidev build slides/why-chicken-breast/slides.md",
+    "export:chicken": "slidev export slides/why-chicken-breast/slides.md",
+    "dev:chicken-cm": "slidev slides/why-chicken-breast-classmethod/slides.md --open",
+    "build:chicken-cm": "slidev build slides/why-chicken-breast-classmethod/slides.md",
+    "export:chicken-cm": "slidev export slides/why-chicken-breast-classmethod/slides.md",
     "build:slides": "bash scripts/build-slides.sh",
     "link:components": "bash scripts/link-components.sh"
   },
