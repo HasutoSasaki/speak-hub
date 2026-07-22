@@ -33,7 +33,7 @@ layout: intro
 
 # 何となく続けていたメニュー
 
-<p class="!text-lg !mt-4 !m-0 opacity-70">なぜこの種目数か、なぜこのセット数か、なぜ1日にまとめるか</p>
+<p class="!text-lg !mt-4 !m-0 opacity-70">なぜこの種目数なのか、なぜこのセット数なのか、なぜ1日にまとめるのか</p>
 
 <p v-click class="!text-2xl !mt-10 !m-0 text-center font-bold">「なぜ20セットなのか」と聞かれると、<span class="text-blue-600">きちんと説明できなかった</span></p>
 
@@ -89,7 +89,7 @@ layout: intro
 </div>
 </div>
 
-<p class="!text-lg !mt-10 !m-0 opacity-70">今日は、概ね RIR 1〜3 まで行ったセットを数える対象とする</p>
+<p class="!text-lg !mt-10 !m-0 opacity-70">今日は、概ね RIR 1〜3 まで行ったセットを数える</p>
 
 <!--
 - 軽い重量で楽に終えたセットと、限界2回手前のセットでは刺激が違う。同じ1セットとして数えるのは危険
@@ -133,7 +133,7 @@ layout: statement
 layout: fact
 ---
 
-# 週 約10セット
+# 週約10セット
 ACSM 2026: 筋肥大の目安は1筋群あたり週約10セット
 
 <p class="!text-base !mt-8 opacity-50">Currier et al., ACSM Position Stand, Medicine & Science in Sports & Exercise, 2026（137件のレビュー・3万人超を統合）</p>
@@ -150,7 +150,7 @@ ACSM 2026: 筋肥大の目安は1筋群あたり週約10セット
 # 多いほど伸びやすい
 ## ただし、追加効果は小さくなる
 
-```mermaid {scale: 1.1}
+```mermaid {scale: 0.65}
 %%{init: {
   'theme': 'base',
   'themeVariables': {
@@ -172,7 +172,7 @@ xychart-beta
   line [25, 55, 75, 88, 94]
 ```
 
-<p class="!text-lg !mt-4 !m-0 text-center opacity-70">収穫逓減：セットを増やすほど、追加1セットの効果は小さくなる</p>
+<p class="!text-lg !mt-4 !m-0 text-center opacity-70">この現象を「収穫逓減」と呼ぶ</p>
 
 <!--
 - Pelland et al. 2025のメタ回帰でも、週セット数が増えるほど筋肥大が伸びる傾向は確認されたが、単純な比例ではない
@@ -207,7 +207,7 @@ xychart-beta
 </div>
 </div>
 
-<p class="!text-base !mt-10 !m-0 opacity-50">研究から直接決まる厳密な数値ではなく、成長と回復を見ながら量を調整するための考え方</p>
+<p class="!text-base !mt-10 !m-0 opacity-50">研究から直接決まる数値ではなく、成長と回復を見ながら量を調整するための考え方</p>
 
 <!--
 - セット数を一つの固定値ではなく、個人によって変わる範囲として考えるモデル
@@ -245,7 +245,7 @@ layout: statement
 </div>
 </div>
 
-<p class="!text-xl !mt-10 !m-0 text-center font-bold">頻度は、<span class="text-blue-600">週のセット数を分けて行うためにも使える</span></p>
+<p class="!text-xl !mt-10 !m-0 text-center font-bold">頻度は、<span class="text-blue-600">週のセット数を無理なくこなすためにも使える</span></p>
 
 <!--
 - 週の合計は同じ。では週2回に分ければ必ず筋肉が大きくなるのか、というとそこまで単純ではない
@@ -262,12 +262,16 @@ layout: statement
 <div>
 
 <h3 class="opacity-100 text-xl font-700 mb-2">20セット後半に起きがちなこと</h3>
-<p class="!text-lg !m-0 leading-relaxed opacity-80">使用重量が落ちる、回数が落ちる、可動域が狭くなる、狙っている筋肉以外で補いやすくなる、集中力・関節の疲労が増える</p>
+<p class="!text-lg !m-0 leading-relaxed opacity-80">使用重量が落ちる</p>
+<p class="!text-lg !mt-1 !m-0 leading-relaxed opacity-80">回数が落ちる</p>
+<p class="!text-lg !mt-1 !m-0 leading-relaxed opacity-80">可動域が狭くなる</p>
+<p class="!text-lg !mt-1 !m-0 leading-relaxed opacity-80">狙っている筋肉以外で補いやすくなる</p>
+<p class="!text-lg !mt-1 !m-0 leading-relaxed opacity-80">集中力・関節の疲労が増える</p>
 
 </div>
 <div>
 
-<p class="!text-xl !m-0 leading-relaxed font-bold">週のセット数を複数日に分けると、<span class="text-blue-600">毎回比較的元気な状態で取り組みやすくなる</span></p>
+<p class="!text-xl !m-0 leading-relaxed font-bold">週のセット数を複数日に分けると、<span class="text-blue-600">毎回元気な状態で取り組みやすい</span></p>
 <p class="!text-base !mt-4 !m-0 opacity-50">1回のセット数にも収穫逓減がありそうという補足情報あり（Remmert et al. 2025, 査読前プレプリント）</p>
 
 </div>
@@ -300,7 +304,7 @@ layout: statement
 <h3 class="opacity-100 text-xl font-700 mb-2">これまで</h3>
 
 <p class="!text-lg !m-0 leading-relaxed">頻度　週1回</p>
-<p class="!text-lg !mt-2 !m-0 leading-relaxed">1回のセット数　20</p>
+<p class="!text-lg !mt-2 !m-0 leading-relaxed">1回あたりのセット数　20</p>
 <p class="!text-lg !mt-2 !m-0 leading-relaxed font-bold">週合計　20</p>
 
 </div>
@@ -309,7 +313,7 @@ layout: statement
 <h3 class="opacity-100 text-xl font-700 mb-2 text-blue-600">これから</h3>
 
 <p class="!text-lg !m-0 leading-relaxed">頻度　週2回</p>
-<p class="!text-lg !mt-2 !m-0 leading-relaxed">1回のセット数　8</p>
+<p class="!text-lg !mt-2 !m-0 leading-relaxed">1回あたりのセット数　8</p>
 <p class="!text-lg !mt-2 !m-0 leading-relaxed font-bold text-blue-600">週合計　16</p>
 
 </div>
@@ -332,7 +336,10 @@ layout: statement
 <div>
 
 <h3 class="opacity-100 text-xl font-700 mb-2">記録する項目</h3>
-<p class="!text-lg !m-0 leading-relaxed opacity-80">重量・回数・RIR、後半の回数低下、筋肉痛・関節の違和感、睡眠・体調</p>
+<p class="!text-lg !m-0 leading-relaxed opacity-80">重量・回数・RIR</p>
+<p class="!text-lg !mt-1 !m-0 leading-relaxed opacity-80">後半の回数低下</p>
+<p class="!text-lg !mt-1 !m-0 leading-relaxed opacity-80">筋肉痛・関節の違和感</p>
+<p class="!text-lg !mt-1 !m-0 leading-relaxed opacity-80">睡眠・体調</p>
 
 </div>
 <div>
