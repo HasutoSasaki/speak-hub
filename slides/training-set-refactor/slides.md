@@ -299,22 +299,18 @@ layout: statement
 
 <h3 class="opacity-100 text-xl font-700 mb-2">これまで</h3>
 
-| 項目 | 内容 |
-|---|---|
-| 頻度 | 週1回 |
-| 1回のセット数 | 20 |
-| **週合計** | **20** |
+<p class="!text-lg !m-0 leading-relaxed">頻度　週1回</p>
+<p class="!text-lg !mt-2 !m-0 leading-relaxed">1回のセット数　20</p>
+<p class="!text-lg !mt-2 !m-0 leading-relaxed font-bold">週合計　20</p>
 
 </div>
 <div>
 
 <h3 class="opacity-100 text-xl font-700 mb-2 text-blue-600">これから</h3>
 
-| 項目 | 内容 |
-|---|---|
-| 頻度 | 週2回 |
-| 1回のセット数 | 8 |
-| **週合計** | **16** |
+<p class="!text-lg !m-0 leading-relaxed">頻度　週2回</p>
+<p class="!text-lg !mt-2 !m-0 leading-relaxed">1回のセット数　8</p>
+<p class="!text-lg !mt-2 !m-0 leading-relaxed font-bold text-blue-600">週合計　16</p>
 
 </div>
 </div>
