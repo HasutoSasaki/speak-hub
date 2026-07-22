@@ -34,6 +34,9 @@
     "dev:chicken-cm": "slidev slides/why-chicken-breast-classmethod/slides.md --open",
     "build:chicken-cm": "slidev build slides/why-chicken-breast-classmethod/slides.md",
     "export:chicken-cm": "slidev export slides/why-chicken-breast-classmethod/slides.md",
+    "dev:sets": "slidev slides/training-set-refactor/slides.md --open",
+    "build:sets": "slidev build slides/training-set-refactor/slides.md",
+    "export:sets": "slidev export slides/training-set-refactor/slides.md",
     "build:slides": "bash scripts/build-slides.sh",
     "link:components": "bash scripts/link-components.sh"
   },
