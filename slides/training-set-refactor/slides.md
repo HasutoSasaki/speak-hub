@@ -184,7 +184,7 @@ xychart-beta
 
 # ボリューム・ランドマーク
 
-<p class="!text-lg !mt-2 !m-0 opacity-70">Mike Israetel らが広めた、個人ごとに変わる範囲の考え方</p>
+<p class="!text-lg !mt-2 !m-0 opacity-70">Mike Israetel らが広めた、研究値ではなく実践上の調整フレーム</p>
 
 <div class="mt-10 grid grid-cols-3 gap-10">
 <div>
@@ -207,11 +207,13 @@ xychart-beta
 </div>
 </div>
 
-<p class="!text-base !mt-10 !m-0 opacity-50">研究から直接決まる数値ではなく、成長と回復を見ながら量を調整するための考え方</p>
+<p class="!text-base !mt-10 !m-0 opacity-50">固定の正解ではなく、成長・疲労・回復を見ながら自分の範囲を探す</p>
 
 <!--
-- セット数を一つの固定値ではなく、個人によって変わる範囲として考えるモデル
-- 医学的な検査値ではなく、実践経験をもとにした目安である点は強調しておく
+- ボリュームランドマークは「この筋肉は週何セット」と研究から直接計算できる医学的な検査値ではない
+- Renaissance Periodization の説明では、MV/MEV/MAV/MRV は個人差があり、推奨値は出発点であって、記録を見ながら調整するものとされている
+- PubMed で "volume landmarks" や "maximum recoverable volume" は標準的な査読済み用語としてほぼ確認できない。一方で、週セット数が増えるほど筋肥大が伸びやすい用量反応は Schoenfeld et al. 2017 などで支持されている
+- したがって、ここでは「研究で確定した数値」ではなく、「研究上の週セット数の考え方を、個人の成長と回復に落とし込むための実践フレーム」として扱う
 -->
 
 ---
