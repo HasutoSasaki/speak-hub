@@ -16,11 +16,19 @@ layout: intro
 
 # トレーニーはなぜ鶏むね肉を食べ続けるのか
 
-筋肉、その見えない設計思想
 
 <!--
 - トレーニーと聞くと何を思い浮かべますか？ 鶏むね肉、プロテイン、ゆで卵
 - 「好きだから食べている」という説を今日は検証します
+-->
+
+---
+
+<ProfileCard />
+
+<!--
+- Sasaki Hasuto です
+- classmethod で Web アプリ開発をしています
 -->
 
 ---
@@ -40,15 +48,6 @@ clickAnimation: fade-in.up
 
 ---
 
-<ProfileCard />
-
-<!--
-- Sasaki Hasuto です
-- classmethod で Web アプリ開発をしています
--->
-
----
-
 ## 本当に好きで食べてるの？
 
 <div class="mt-10 grid grid-cols-2 gap-10">
@@ -56,14 +55,14 @@ clickAnimation: fade-in.up
 
 <h3 class="opacity-100 text-xl font-700 mb-2">一般的なイメージ</h3>
 
-「筋トレにハマると鶏むね肉ばかり食べるようになる」
+<p class="text-xl">「筋トレにハマると鶏むね肉ばかり食べるようになる」</p>
 
 </div>
 <div>
 
 <h3 class="opacity-100 text-xl font-700 mb-2">今日の結論</h3>
 
-？？？
+<p class="text-4xl font-700">？？？</p>
 
 </div>
 </div>
@@ -94,18 +93,18 @@ layout: fact
 <div class="mt-10 grid grid-cols-3 gap-10 text-center">
 <div>
   <img src="./assets/images/eggs-tray.jpg" class="h-32 w-full object-cover" />
-  <h3 class="opacity-100 text-lg font-700 mt-3">卵換算</h3>
-  <p class="text-2xl font-700 mt-1">18〜25個</p>
+  <h3 class="opacity-100 text-xl font-700 mt-3">卵換算</h3>
+  <p class="text-3xl font-700 mt-1">18〜25個</p>
 </div>
 <div>
   <img src="./assets/images/chicken-breast-raw.jpg" class="h-32 w-full object-cover" />
-  <h3 class="opacity-100 text-lg font-700 mt-3">鶏むね肉換算</h3>
-  <p class="text-2xl font-700 mt-1">約500〜650g</p>
+  <h3 class="opacity-100 text-xl font-700 mt-3">鶏むね肉換算</h3>
+  <p class="text-3xl font-700 mt-1">約500〜650g</p>
 </div>
 <div>
   <img src="./assets/images/protein-scoop.jpg" class="h-32 w-full object-cover" />
-  <h3 class="opacity-100 text-lg font-700 mt-3">プロテイン換算</h3>
-  <p class="text-2xl font-700 mt-1">約4〜5杯</p>
+  <h3 class="opacity-100 text-xl font-700 mt-3">プロテイン換算</h3>
+  <p class="text-3xl font-700 mt-1">約4〜5杯</p>
 </div>
 </div>
 
@@ -120,34 +119,35 @@ clickAnimation: fade-in.up
 ---
 
 <div v-click="1" class="text-3xl">トレーニーはプロテインが好きなんじゃありません。</div>
-<div v-click="2" class="text-2xl mt-8 opacity-80">鶏むね肉だけで毎日150gのタンパク質を摂る生活を、<br>一週間だけ想像してください。</div>
+<div v-click="2" class="text-2xl mt-8 opacity-80">鶏むね肉だけで毎日150gのタンパク質を摂ろうとすると、<br>約650gの鶏むね肉を、一週間食べ続けることになります。</div>
 <div v-click="3" class="text-4xl font-700 mt-12">たぶん、2日目にはプロテインを買いに行きます。</div>
 
 <!--
 - ここが一番伝えたい一言
 - 150gは体重70kgの必要量112〜154gの範囲内、誇張ではなく実際の数字
+- 鶏むね肉(皮なし)は可食部100gあたりタンパク質約23gなので、150g÷0.23≈約650g
 - 最後の1行はオチなので、少し間を置いてから読む
 -->
 
 ---
 
-## よくある誤解① タイミング神話
+## よくある誤解① ゴールデンタイム
 
 <div class="mt-10 grid grid-cols-2 gap-10">
 <div>
 
 <h3 class="opacity-100 text-xl font-700 mb-2">思われていること</h3>
 
-「運動後30分以内に飲まないと意味がない」
+<p class="text-xl">「運動後30分以内に飲まないと意味がない」</p>
 
 </div>
 <div>
 
 <h3 class="opacity-100 text-xl font-700 mb-2">実際は</h3>
 
-総摂取量の方が重要
+<p class="text-2xl font-700">総摂取量の方が重要</p>
 
-<p class="text-base opacity-80 mt-4">Casuso &amp; Goossens, Nutrients 2025</p>
+<p class="text-sm opacity-80 mt-4">Casuso &amp; Goossens, Nutrients 2025</p>
 
 </div>
 </div>
@@ -158,53 +158,28 @@ clickAnimation: fade-in.up
 -->
 
 ---
-
-## よくある誤解② 腎臓への影響
-
-<div class="mt-10 grid grid-cols-2 gap-10">
-<div>
-
-<h3 class="opacity-100 text-xl font-700 mb-2">思われていること</h3>
-
-「タンパク質の摂りすぎは腎臓に悪い」
-
-</div>
-<div>
-
-<h3 class="opacity-100 text-xl font-700 mb-2">実際は</h3>
-
-健康な人には根拠なし
-
-<p class="text-base opacity-90 mt-2">既往の腎疾患がある人は別</p>
-<p class="text-base opacity-80 mt-4">Devries et al., J Nutr 2018</p>
-
-</div>
-</div>
-
-<!--
-- 健康な人と腎疾患がある人の混同が誤解の元
--->
-
----
 layout: image-right
 image: /images/house-construction.jpg
 ---
 
-## よくある誤解③
+## よくある誤解②
 ### 「ご飯を多く食べればよくない？」
 
-筋肉を「家」に例えると
+<p class="text-xl">炭水化物・脂質は、炭素・水素・酸素だけでできている</p>
 
-- タンパク質 = 材料
-- 炭水化物 = エネルギー
-- 電気だけあっても家は建たない
-- 材料だけあっても職人が動けない
-- だから両方必要
+<div class="text-xl leading-relaxed mt-4">
+
+- アミノ酸（タンパク質）だけが窒素を含む
+- 筋肉の材料になるのは、この窒素を含むアミノ酸
+- 必須アミノ酸9種は体内で合成できない
+- ご飯（炭水化物）をいくら増やしても、窒素は補充されない
+
+</div>
 
 <!--
-- 炭水化物・脂質は炭素・水素・酸素のみで構成されるエネルギー源
-- アミノ酸は窒素を含むのが本質的な違い。必須アミノ酸9種は体内で合成できない
-- 炭水化物をいくら摂っても、筋肉の材料である窒素は補充されない
+- 炭水化物・脂質・アミノ酸は、いずれもエネルギー源になれる
+- ただし筋肉の材料（アミノ酸の再合成）に使えるのは窒素を含むアミノ酸だけ
+- 必須アミノ酸9種は体内で合成できないので、食事から摂るしかない
 -->
 
 ---
@@ -212,6 +187,7 @@ layout: fact
 ---
 
 # +1.2kg vs +0.1kg
+筋肉量の変化（高タンパク質群 vs 低タンパク質群）
 同じ運動・同じカロリー制限。違いはタンパク質量だけ。
 
 <!--
