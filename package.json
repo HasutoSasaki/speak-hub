@@ -43,6 +43,9 @@
     "dev:creatine": "slidev slides/why-suspicious-powder-creatine/slides.md --open",
     "build:creatine": "slidev build slides/why-suspicious-powder-creatine/slides.md",
     "export:creatine": "slidev export slides/why-suspicious-powder-creatine/slides.md",
+    "dev:grip": "slidev slides/grip-approver/slides.md --open",
+    "build:grip": "slidev build slides/grip-approver/slides.md",
+    "export:grip": "slidev export slides/grip-approver/slides.md",
     "build:slides": "bash scripts/build-slides.sh",
     "link:components": "bash scripts/link-components.sh"
   },
