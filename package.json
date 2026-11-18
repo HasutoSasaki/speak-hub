@@ -40,6 +40,9 @@
     "dev:powder": "slidev slides/why-suspicious-powder/slides.md --open",
     "build:powder": "slidev build slides/why-suspicious-powder/slides.md",
     "export:powder": "slidev export slides/why-suspicious-powder/slides.md",
+    "dev:creatine": "slidev slides/why-suspicious-powder-creatine/slides.md --open",
+    "build:creatine": "slidev build slides/why-suspicious-powder-creatine/slides.md",
+    "export:creatine": "slidev export slides/why-suspicious-powder-creatine/slides.md",
     "build:slides": "bash scripts/build-slides.sh",
     "link:components": "bash scripts/link-components.sh"
   },
