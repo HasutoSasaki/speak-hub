@@ -40,4 +40,4 @@
 
 ### クレアチンについて
 
-今回のLTでは扱わない。別の機会にまとめる。
+今回のLTでは扱わない。続編として `slides/why-suspicious-powder-creatine/` にまとめた。
